@@ -15,7 +15,7 @@ using namespace std;
 
 int main() {
     ifstream monFichier("File.txt");
-    istream_iterator<Rectangle> it(monFichier); // Un iterateur lisant des ractangles depuis le fichier.
+    istream_iterator<Rectangle> it(monFichier); // Un iterateur lisant des rectangles depuis le fichier.
     istream_iterator<Rectangle> end; // Le signal de fin.
     Rectangle rect;
     
