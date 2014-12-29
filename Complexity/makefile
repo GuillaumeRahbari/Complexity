@@ -8,4 +8,5 @@ prog : main.o
 extra_all :
 extra_clean :
 
-main.o : main.cpp
+Rectangle.o : Rectangle.h
+main.o : main.cpp Rectangle.o

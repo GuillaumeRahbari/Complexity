@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <iterator>
+#include "Rectangle.h"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ int main() {
         }
         cout << taille << endl;
         // Lit un caractère dans le vide.
-        (int)monFichier.get();
+        monFichier.get();
         // Permet de recuperer la longueur de la boite.
         if(monFichier >> taille2){
         	cout << taille2 << endl;
