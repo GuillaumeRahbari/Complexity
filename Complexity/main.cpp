@@ -14,21 +14,12 @@ using namespace std;
 
 int main() {
     ifstream monFichier("File.txt");
-    int taille; 
-    int taille2;
+    Rectangle rect;
     
     if (monFichier) {
-    	// Permet de recuperer la largeur de boite.
-        if(monFichier >> taille){
-        	cout << taille << endl;
-        }
-        cout << taille << endl;
-        // Lit un caractère dans le vide.
-        monFichier.get();
-        // Permet de recuperer la longueur de la boite.
-        if(monFichier >> taille2){
-        	cout << taille2 << endl;
-        }
+    	// Permet de recuperer un rectangle.
+        monFichier >> rect;
+        cout << rect << endl;
     } else {
         cerr << "ERREUR" << endl;;
     }
