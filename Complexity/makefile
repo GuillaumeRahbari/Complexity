@@ -3,7 +3,7 @@ include default.mk
 ALL = prog
 
 prog : main.o 
-	$(CXX_LINK) -o prog  main.o 
+	$(CXX_LINK) -o prog  main.o Rectangle.o
 
 extra_all :
 extra_clean :
