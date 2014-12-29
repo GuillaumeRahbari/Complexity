@@ -14,6 +14,13 @@
 
 using namespace std;
 
+
+/*!
+ * On reecrit tout le fichier entree par l'utilisateur mais en supprimant les virgules.
+ *
+ * \param ifs le fichier ouvert en lecture.
+ * \param ofs le fichier ouvert en ecriture.
+ */
 void sansVirgule (ifstream& ifs, ofstream& ofs) 
 {
 	// sauvegarder la position courante 
@@ -25,6 +32,8 @@ void sansVirgule (ifstream& ifs, ofstream& ofs)
     // restaurer la position initiale du fichier 
     ifs.seekg( pos,  std::ios_base::beg ) ;
 	char c = 'a';
+
+	// Parcours du fichier.
 	for (long i = pos; i < size; ++i)
 	{
 		ifs.get(c);
@@ -40,12 +49,21 @@ void sansVirgule (ifstream& ifs, ofstream& ofs)
 }
 
 int main() {
-    ifstream fichier("File.txt");
+	cout << "Veuillez choisir un nom de fichier valide (respecter la casse et l'extension) : " << endl;
+	string nomFichier;
+	cin >> nomFichier;
+	cout << endl;
+
+	// Permet de creer le ifstream a partir du nom.
+    ifstream fichier(nomFichier.c_str());
     ofstream fichierSansVirgule("FichierSansVirgule.txt");
+
+    // On verifie qu'il n'y a pas de problème lors de l'ouverture.
     if(fichier)
     {
 	    if (fichierSansVirgule)
 	    {
+	    	// Suppression des virgules.
 	    	sansVirgule(fichier, fichierSansVirgule);
 	    }
 	    else
@@ -57,9 +75,11 @@ int main() {
     {
     	cerr << "ERREUR" << endl;
     }
+    // Fermeture des fichiers.
     fichier.close();
     fichierSansVirgule.close();
 
+    // Ouverture du fichier sans virgule.
     ifstream monFichier("FichierSansVirgule.txt");
 
     istream_iterator<Rectangle> it(monFichier); // Un iterateur lisant des rectangles depuis le fichier.
