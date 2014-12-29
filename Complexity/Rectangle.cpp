@@ -15,7 +15,18 @@
 Rectangle::Rectangle(int largeur, int hauteur) : _largeur(largeur), _hauteur(hauteur){}
 
 /*!
- * On lit quelque chose de la forme largeurxhauteur. Le séparateur
+ * On affiche le rectangle dans le format 'largeur x hauteur'.
+ *
+ * \param[in,out] os l'output stream.
+ * \param[in] rect le rectangle a afficher.
+ */
+ostream& operator<<(ostream& os, Rectangle rect) {
+	os << rect._largeur << 'x' << rect._hauteur;
+	return os;
+}
+
+/*!
+ * On lit quelque chose de la forme 'largeur x hauteur'. Le séparateur
  * doit etre \c 'x'.
  *
  * Si on ne peut pas lire le premier champs (la largeur), alors on a certainement atteint la fin de fichier
