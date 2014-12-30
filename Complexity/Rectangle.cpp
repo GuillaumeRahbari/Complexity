@@ -21,7 +21,26 @@ Rectangle::Rectangle(int largeur, int hauteur) : _largeur(largeur), _hauteur(hau
  * \param[in] rect le rectangle a afficher.
  */
 ostream& operator<<(ostream& os, Rectangle rect) {
-	os << rect._largeur << 'x' << rect._hauteur;
+	os << rect._largeur << 'x' << rect._hauteur << " :" << endl;
+	for (int i = 0; i < rect._largeur; ++i)
+	{
+		os << "-";
+	}
+	os << endl;
+	for (int i = 0; i < rect._hauteur; ++i)
+	{
+		os << "|";
+		for (int j = 1; j < rect._largeur; ++j)
+		{
+			os << " ";
+		}
+		os << "|";
+		os << endl;
+	}
+	for (int i = 0; i < rect._largeur; ++i)
+	{
+		os << "-";
+	}
 	return os;
 }
 
