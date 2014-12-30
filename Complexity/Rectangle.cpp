@@ -56,3 +56,13 @@ istream& operator>>(istream& is, Rectangle& rect) {
 	}
 	return is;
 }
+
+/*!
+ * On compare deux rectangles avec la fonction strictement inferieur a.
+ *
+ * \param rect1 le premier rectangle.
+ * \param rect2 le deuxieme rectangle.
+ */
+bool operator<(Rectangle rect1, Rectangle rect2) {
+	
+}

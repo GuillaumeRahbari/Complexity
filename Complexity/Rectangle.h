@@ -33,6 +33,9 @@ public:
     //! Lit un Rectangle.
     friend ::std::istream& operator>>(::std::istream& is, Rectangle& rect);
 
+    //! Operateur plus petit que pour les rectangles
+	friend bool operator< (Rectangle rect1, Rectangle rect2);
+
 };
 
 #endif
