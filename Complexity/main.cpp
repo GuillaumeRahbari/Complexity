@@ -86,14 +86,17 @@ int main() {
     istream_iterator<Rectangle> it(monFichier); // Un iterateur lisant des rectangles depuis le fichier.
     istream_iterator<Rectangle> end; // Le signal de fin.
 
-    Rectangle rect;
+    // Permet de crer la boite.
+    Boite boite(it->largeur(), it->hauteur());
+    ++it;
+
 	// Permet de recuperer tous les rectangles.
 	while (it != end)
 	{
 		// Permet de recuperer un rectangle.
-    	rect = *it;
-    	cout << rect << endl;
+    	boite.add(*it);
     	++it;
 	}
+	cout << boite;
     return 0;
 }
