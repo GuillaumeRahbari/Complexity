@@ -39,38 +39,29 @@ string Rectangle::printSpace(int n) const{
 	string space = "";
 	for (int i = 0; i < n; ++i)
 	{
-		space+="#";
+		space+=" ";
 	}
 	return space;
 }
 
 /*!
- * On affiche le rectangle dans le format 'largeur x hauteur'.
+ * On affiche le rectangle en forme de #.
+ * On considère un carreau en large et en hauteur comme 4 #.
+ * Donc un rectangle 2x1 (largeur x hauteur) sera de 8# de large et 4# de haut.
  *
  * \param[in,out] os l'output stream.
  * \param[in] rect le rectangle a afficher.
  */
 ostream& operator<<(ostream& os, Rectangle rect) {
 	os << rect._largeur << 'x' << rect._hauteur << " :" << endl;
-	for (int i = 0; i < rect._largeur; ++i)
+	os << rect.printDiez(4 * rect._largeur) << endl;
+	for (int i = 0; i < 4*rect._hauteur-2; ++i)
 	{
-		os << "####";
+		os << rect.printDiez(1);
+		os << rect.printSpace(4 * rect._largeur - 2);
+		os << rect.printDiez(1) << endl;
 	}
-	os << endl;
-	for (int i = 0; i < rect._hauteur; ++i)
-	{
-		os << "#";
-		for (int j = 0; j < rect._largeur; ++j)
-		{
-			os << "  ";
-		}
-		os << "#";
-		os << endl;
-	}
-	for (int i = 0; i < rect._largeur; ++i)
-	{
-		os << "####";
-	}
+	os << rect.printDiez(4 * rect._largeur);
 	return os;
 }
 
