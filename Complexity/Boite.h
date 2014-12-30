@@ -25,7 +25,7 @@ public:
 	Boite(int largeur = 0, int hauteur = 0);
 
 	//! Ajoute un rectangle a la fin du vecteur.
-	void add (const Rectangle rect);
+	void add (const Rectangle& rect);
 
 };
 
