@@ -26,7 +26,7 @@ void Boite::add (const Rectangle& rect) {
  * Trie le vecteur.
  */
 void Boite::sort() {
-
+	std::sort(_boite.begin(), _boite.end());
 }
 
 /*!
