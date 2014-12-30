@@ -10,11 +10,19 @@
 #define _BOITE_H_
 
 #include <iostream>
+#include <vector>
 #include "Rectangle.h"
 using namespace std;
 
 class Boite
 {
+private:
+	int largeur;
+	int hauteur;
+	vector<Rectangle> boite;
+public:
+	//! Constructeur.
+	Boite(int largeur = 0, int hauteur = 0);
 
 };
 

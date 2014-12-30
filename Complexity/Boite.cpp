@@ -7,3 +7,9 @@
 //
 
 #include "Boite.h"
+
+/*! 
+ * \param largeur largeur
+ * \param hauteur hauteur
+ */
+Boite::Boite(int largeur, int hauteur) : _largeur(largeur), _hauteur(hauteur){}
