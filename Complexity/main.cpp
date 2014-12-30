@@ -11,6 +11,7 @@
 #include <iterator>
 #include <algorithm>
 #include "Rectangle.h"
+#include "Boite.h"
 
 using namespace std;
 
