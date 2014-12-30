@@ -86,18 +86,48 @@ int main() {
     istream_iterator<Rectangle> it(monFichier); // Un iterateur lisant des rectangles depuis le fichier.
     istream_iterator<Rectangle> end; // Le signal de fin.
 
-    // Permet de crer la boite.
-    Boite boite(it->largeur(), it->hauteur());
+    // Permet de creer la boite.
+    vector<Boite> listeBoite;
+    listeBoite.push_back(Boite(it->largeur(), it->hauteur()));
     ++it;
 
-	// Permet de recuperer tous les rectangles.
-	while (it != end)
-	{
-		// Permet de recuperer un rectangle.
-    	boite.add(*it);
+    // Liste des rectangles
+    vector<Rectangle> listeRectangle;
+    while (it != end)
+    {
+    	listeRectangle.push_back(*it);
     	++it;
+    }
+    // Permet de trier les rectangles dans l'ordre croissant.
+    std::sort(listeRectangle.begin(), listeRectangle.end());
+    // Permet d'avoir les rectangles dans l'ordre decroissant.
+	std::reverse(listeRectangle.begin(), listeRectangle.end());
+
+	// Parcours de la liste de rectangles.
+	for (Rectangle rect : listeRectangle)
+	{
+		bool boolean = true;
+		int i = 0;
+		// Essaye d'ajouter un rectangle a une boite.
+		while (boolean)
+		{
+			try
+			{
+				listeBoite[i].add(rect);
+				boolean = false;
+			}
+			catch (Boite::Invalid_Add)
+			{
+				cerr << "ERREUR : Impossible d'ajouter le rectangle a la boite" << endl;
+			}
+			catch (Boite::Invalid)
+			{
+				boolean = false;
+				cerr << "ERREUR : Impossible d'ajouter ce rectangle a une boite (dimensions incorrectes)" << endl;
+			}
+			++i;
+		}
 	}
-	boite.sort();
-	cout << boite;
+	cout << listeBoite[0];
     return 0;
 }
