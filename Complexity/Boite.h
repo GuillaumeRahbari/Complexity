@@ -17,12 +17,15 @@ using namespace std;
 class Boite
 {
 private:
-	int largeur;
-	int hauteur;
-	vector<Rectangle> boite;
+	int _largeur;
+	int _hauteur;
+	vector<Rectangle> _boite;
 public:
 	//! Constructeur.
 	Boite(int largeur = 0, int hauteur = 0);
+
+	//! Ajoute un rectangle a la fin du vecteur.
+	void add (const Rectangle rect);
 
 };
 
