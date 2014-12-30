@@ -18,9 +18,15 @@ Boite::Boite(int largeur, int hauteur) : _largeur(largeur), _hauteur(hauteur){}
  * Ajoute un rectangle directement a la fin du vecteur.
  * \param rect rectangle.
  */
-void Boite::add (const Rectangle& rect)
-{
+void Boite::add (const Rectangle& rect) {
 	_boite.push_back(rect);
+}
+
+/*!
+ * Trie le vecteur.
+ */
+void Boite::sort() {
+
 }
 
 /*!

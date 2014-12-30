@@ -28,6 +28,9 @@ public:
 	//! Ajoute un rectangle a la fin du vecteur.
 	void add (const Rectangle& rect);
 
+	//! Trie du vecteur.
+	void sort ();
+
 	//! Ecris une Boite.
     friend ::std::ostream& operator<<(::std::ostream& os, Boite boite);
 
