@@ -23,10 +23,11 @@ void Boite::add (const Rectangle& rect) {
 }
 
 /*!
- * Trie le vecteur.
+ * Trie le vecteur dans l'ordre decroissant (du plus grand au plus petit).
  */
 void Boite::sort() {
 	std::sort(_boite.begin(), _boite.end());
+	std::reverse(_boite.begin(), _boite.end());
 }
 
 /*!
