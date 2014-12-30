@@ -59,10 +59,23 @@ istream& operator>>(istream& is, Rectangle& rect) {
 
 /*!
  * On compare deux rectangles avec la fonction strictement inferieur a.
+ * On compare d'abord sur le premier champs (la largeur).
+ * Si les deux rectangles ont des largeurs egales, alors on compare sur le deuxieme champs (la hauteur).
  *
  * \param rect1 le premier rectangle.
  * \param rect2 le deuxieme rectangle.
  */
 bool operator<(Rectangle rect1, Rectangle rect2) {
-	return false;
+	if (rect1._largeur < rect2._largeur)
+	{
+		return true;
+	}
+	else if (rect1._largeur == rect2._largeur)
+	{
+		return rect1._hauteur < rect2._hauteur;
+	}
+	else
+	{
+		return false;
+	}
 }
