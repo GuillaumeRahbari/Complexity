@@ -97,6 +97,7 @@ int main() {
     	boite.add(*it);
     	++it;
 	}
+	boite.sort();
 	cout << boite;
     return 0;
 }
