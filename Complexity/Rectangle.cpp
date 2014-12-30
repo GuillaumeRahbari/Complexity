@@ -64,5 +64,5 @@ istream& operator>>(istream& is, Rectangle& rect) {
  * \param rect2 le deuxieme rectangle.
  */
 bool operator<(Rectangle rect1, Rectangle rect2) {
-	
+	return false;
 }
