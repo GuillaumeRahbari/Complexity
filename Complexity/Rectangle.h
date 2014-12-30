@@ -27,6 +27,12 @@ public:
 	//! Constructeur.
 	Rectangle(int largeur = 0, int hauteur = 0);
 
+	//! Get de la largeur du rectangle.
+    int largeur() const {return _largeur;}
+
+    //! Get de la hauteur du rectangle.
+    int hauteur() const {return _hauteur;}
+
 	//! Ecris un Rectangle.
     friend ::std::ostream& operator<<(::std::ostream& os, Rectangle rect);
 
