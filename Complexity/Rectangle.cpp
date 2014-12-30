@@ -15,6 +15,36 @@
 Rectangle::Rectangle(int largeur, int hauteur) : _largeur(largeur), _hauteur(hauteur){}
 
 /*!
+ * Ecris n fois la lettre #(diez).
+ * 
+ * \param  n le nombre de #.
+ * \return Une chaine de caractère contenant n #.
+ */
+string Rectangle::printDiez(int n) const{
+	string diez = "";
+	for (int i = 0; i < n; ++i)
+	{
+		diez+="#";
+	}
+	return diez;
+}
+
+/*!
+ * Ecris n fois un espace.
+ * 
+ * \param  n le nombre d'espaces'.
+ * \return Une chaine de caractère contenant n espaces.
+ */
+string Rectangle::printSpace(int n) const{
+	string space = "";
+	for (int i = 0; i < n; ++i)
+	{
+		space+="#";
+	}
+	return space;
+}
+
+/*!
  * On affiche le rectangle dans le format 'largeur x hauteur'.
  *
  * \param[in,out] os l'output stream.
@@ -24,22 +54,22 @@ ostream& operator<<(ostream& os, Rectangle rect) {
 	os << rect._largeur << 'x' << rect._hauteur << " :" << endl;
 	for (int i = 0; i < rect._largeur; ++i)
 	{
-		os << "-";
+		os << "####";
 	}
 	os << endl;
 	for (int i = 0; i < rect._hauteur; ++i)
 	{
-		os << "|";
-		for (int j = 1; j < rect._largeur; ++j)
+		os << "#";
+		for (int j = 0; j < rect._largeur; ++j)
 		{
-			os << " ";
+			os << "  ";
 		}
-		os << "|";
+		os << "#";
 		os << endl;
 	}
 	for (int i = 0; i < rect._largeur; ++i)
 	{
-		os << "-";
+		os << "####";
 	}
 	return os;
 }

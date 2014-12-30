@@ -33,6 +33,12 @@ public:
     //! Get de la hauteur du rectangle.
     int hauteur() const {return _hauteur;}
 
+    //! Ecris des #.
+    string printDiez(int n) const;
+
+    // Ecris des espaces.
+    string printSpace(int n) const;
+
 	//! Ecris un Rectangle.
     friend ::std::ostream& operator<<(::std::ostream& os, Rectangle rect);
 
