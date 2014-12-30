@@ -30,6 +30,9 @@ void Boite::add (const Rectangle& rect)
  * \param[in] boite la boite a afficher.
  */
 ostream& operator<<(ostream& os, Boite boite) {
+	os << "Taille de la boite : " << boite._largeur << 'x' << boite._hauteur << endl;
+	os << endl;
+	os << "Les différents rectangles : " << endl;
 	for_each (boite._boite.begin(), boite._boite.end(), [&os](Rectangle rect){
 		os << rect << endl;
 	});
