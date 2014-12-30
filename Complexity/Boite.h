@@ -22,14 +22,17 @@ private:
 	int _hauteur;
 	vector<Rectangle> _boite;
 public:
+	//! Ajout d'un rectangle invalide.
+	class Invalid_Add {};
+
+	//! Invalide rectangle.
+	class Invalid {};
+
 	//! Constructeur.
 	Boite(int largeur = 0, int hauteur = 0);
 
 	//! Ajoute un rectangle a la fin du vecteur.
 	void add (const Rectangle& rect);
-
-	//! Trie du vecteur.
-	void sort ();
 
 	//! Ecris une Boite.
     friend ::std::ostream& operator<<(::std::ostream& os, Boite boite);
