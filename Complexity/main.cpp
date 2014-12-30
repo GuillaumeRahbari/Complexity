@@ -88,7 +88,8 @@ int main() {
 
     // Permet de creer la boite.
     vector<Boite> listeBoite;
-    listeBoite.push_back(Boite(it->largeur(), it->hauteur()));
+    int largeur = it->largeur();
+    int hauteur = it->hauteur();
     ++it;
 
     // Liste des rectangles
@@ -113,17 +114,23 @@ int main() {
 		{
 			try
 			{
-				listeBoite[i].add(rect);
+				listeBoite.at(i).add(rect);
 				boolean = false;
 			}
 			catch (Boite::Invalid_Add)
 			{
-				cerr << "ERREUR : Impossible d'ajouter le rectangle a la boite" << endl;
+				cerr << "ERREUR : Impossible d'ajouter le rectangle a la boite." << endl;
 			}
 			catch (Boite::Invalid)
 			{
 				boolean = false;
-				cerr << "ERREUR : Impossible d'ajouter ce rectangle a une boite (dimensions incorrectes)" << endl;
+				cerr << "ERREUR : Impossible d'ajouter ce rectangle a une boite (dimensions incorrectes)." << endl;
+			}
+			catch (exception const& e)
+			{
+				cerr << "ERREUR : Plus de boites disponibles -> creation d'une nouvelle boite." << endl;
+				listeBoite.push_back(Boite(largeur, hauteur));
+				--i;
 			}
 			++i;
 		}
