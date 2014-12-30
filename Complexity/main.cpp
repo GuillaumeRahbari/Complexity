@@ -128,6 +128,9 @@ int main() {
 			++i;
 		}
 	}
-	cout << listeBoite[0];
+	for (Boite boite : listeBoite)
+	{
+		cout << boite;
+	}
     return 0;
 }
