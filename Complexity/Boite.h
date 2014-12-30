@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "Rectangle.h"
 using namespace std;
 
@@ -26,6 +27,9 @@ public:
 
 	//! Ajoute un rectangle a la fin du vecteur.
 	void add (const Rectangle& rect);
+
+	//! Ecris une Boite.
+    friend ::std::ostream& operator<<(::std::ostream& os, Boite boite);
 
 };
 

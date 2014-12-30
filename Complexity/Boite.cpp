@@ -22,3 +22,16 @@ void Boite::add (const Rectangle& rect)
 {
 	_boite.push_back(rect);
 }
+
+/*!
+ * On affiche la boite.
+ *
+ * \param[in,out] os l'output stream.
+ * \param[in] boite la boite a afficher.
+ */
+ostream& operator<<(ostream& os, Boite boite) {
+	for_each (boite._boite.begin(), boite._boite.end(), [&os](Rectangle rect){
+		os << rect << endl;
+	});
+	return os;
+}
