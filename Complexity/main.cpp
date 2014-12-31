@@ -137,7 +137,7 @@ int main() {
 	}
 	for (Boite boite : listeBoite)
 	{
-		cout << boite;
+		cout << boite << "   ";
 	}
     return 0;
 }
