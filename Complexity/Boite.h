@@ -5,14 +5,14 @@
 //  Created by Guillaume Rahbari on 29/12/2014.
 //  Copyright (c) 2014 Guillaume Rahbari. All rights reserved.
 //
-//
+
 #ifndef _BOITE_H_
 #define _BOITE_H_
 
 #include <iostream>
-#include <vector>
 #include <algorithm>
 #include "Rectangle.h"
+#include "Matrix.h"
 using namespace std;
 
 
@@ -21,8 +21,8 @@ class Boite
 private:
 	int _largeur;
 	int _hauteur;
-	int _nbR;
-	vector<vector> _boite;
+
+	Matrix _boite;
 
 public:
 	//! Ajout d'un rectangle invalide.

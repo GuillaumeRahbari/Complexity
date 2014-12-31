@@ -12,24 +12,39 @@
  * \param largeur largeur.
  * \param hauteur hauteur.
  */
-Boite::Boite(int largeur, int hauteur) : _largeur(largeur), _hauteur(hauteur){}
+
+int NBR = 1; 
+
+Boite::Boite(int largeur, int hauteur) 
+	: _largeur(largeur), _hauteur(hauteur), _boite(4*hauteur+2, 4*largeur+2, " ")
+{
+	for (int colonnes = 0; colonnes < 4*largeur+2; ++colonnes)
+	{
+		_boite(0,colonnes) = '#'; 
+	}
+	for (int lignes = 1; lignes < 4*hauteur+2; ++lignes)
+	{
+		_boite(lignes,0) = '#'; 
+		_boite(lignes,4*largeur+1) = '#'; 
+	}
+	for (int colonnes = 0; colonnes < 4*largeur+2; ++colonnes)
+	{
+		_boite(4*hauteur + 1,colonnes) = '#'; 
+	}
+}
 
 /*!
- * Ajoute un rectangle directement a la fin du vecteur.
  * \param rect rectangle.
  */
 void Boite::add (const Rectangle& rect) {
-	//_boite.push_back(rect);
-	for(int i = 0 ; i < rect._largeur; ++i)
+	string aux = to_string(NBR%9);
+	for (int j = 1; j < 4*rect.hauteur() + 1; ++j)
 	{
-		_boite.push_back(boite.nbR);
+		for (int i = 0; i < 4*rect.largeur(); ++i)
+		{
+			_boite(j,1+i) = aux;
+		}
 	}
-	for (int i = 0; i < rect._hauteur; ++i)
-	{
-		_boite.push_back(boite.nbR);
-	}
-
-
 }
 
 /*!
@@ -38,20 +53,11 @@ void Boite::add (const Rectangle& rect) {
  * \param[in,out] os l'output stream.
  * \param[in] boite la boite a afficher.
  */
+
 ostream& operator<<(ostream& os, Boite boite) {
-	os << "Taille de la boite : " << boite._largeur << 'x' << boite._hauteur << endl;
-	os << endl;
-	//os << "Les différents rectangles : " << endl;
-
-		os << boite.printAsterisque(boite._largeur*4) << endl ;
-		for (Boite boite : listeBoite)
-		{
-			cout << _boite;
-		}
-		os << boite.printAsterisque(boite._largeur*4) << endl ;
-	return os;
+os << boite._boite;
+return os;
 }
-
 /*!
  * Ecris n fois la lettre *(asterisque).
  * 

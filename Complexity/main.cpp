@@ -139,15 +139,17 @@ int main() {
 
 	/*for (Boite boite : listeBoite)
 	{
-		cout << boite;
+		cout << boite << "   ";
 	}
 	    cout << "hola\n";
 	*/
-	 Rectangle r(1,1);
+	 Rectangle r(2,3);
 
-	 Boite b(3,3);
+	 Boite b(4,4);
+	 //Boite::b(0,0) = 'P';
 	// b.add(r);
-	 cout << r;   
-
+	 cout << b;   
+	 b.add(r);
+	 cout << b;
     return 0;
 }
