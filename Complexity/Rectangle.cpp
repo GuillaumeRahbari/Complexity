@@ -61,7 +61,7 @@ ostream& operator<<(ostream& os, Rectangle rect) {
 		os << rect.printSpace(4 * rect._largeur - 2);
 		os << rect.printDiez(1) << endl;
 	}
-	os << rect.printDiez(4 * rect._largeur);
+	os << rect.printDiez(4 * rect._largeur) << endl;
 	return os;
 }
 

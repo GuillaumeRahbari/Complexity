@@ -15,12 +15,15 @@
 #include "Rectangle.h"
 using namespace std;
 
-class Boite
+
+class Boite 
 {
 private:
 	int _largeur;
 	int _hauteur;
-	vector<Rectangle> _boite;
+	int _nbR;
+	vector<vector> _boite;
+
 public:
 	//! Ajout d'un rectangle invalide.
 	class Invalid_Add {};
@@ -33,6 +36,12 @@ public:
 
 	//! Ajoute un rectangle a la fin du vecteur.
 	void add (const Rectangle& rect);
+
+	//! Ecris des *.
+    string printAsterisque(int n) const;
+
+    // Ecris des espaces.
+    string printSpace(int n) const;
 
 	//! Ecris une Boite.
     friend ::std::ostream& operator<<(::std::ostream& os, Boite boite);

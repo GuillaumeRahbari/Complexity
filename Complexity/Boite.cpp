@@ -19,7 +19,17 @@ Boite::Boite(int largeur, int hauteur) : _largeur(largeur), _hauteur(hauteur){}
  * \param rect rectangle.
  */
 void Boite::add (const Rectangle& rect) {
-	_boite.push_back(rect);
+	//_boite.push_back(rect);
+	for(int i = 0 ; i < rect._largeur; ++i)
+	{
+		_boite.push_back(boite.nbR);
+	}
+	for (int i = 0; i < rect._hauteur; ++i)
+	{
+		_boite.push_back(boite.nbR);
+	}
+
+
 }
 
 /*!
@@ -31,9 +41,43 @@ void Boite::add (const Rectangle& rect) {
 ostream& operator<<(ostream& os, Boite boite) {
 	os << "Taille de la boite : " << boite._largeur << 'x' << boite._hauteur << endl;
 	os << endl;
-	os << "Les différents rectangles : " << endl;
-	for_each (boite._boite.begin(), boite._boite.end(), [&os](Rectangle rect){
-		os << rect << endl;
-	});
+	//os << "Les différents rectangles : " << endl;
+
+		os << boite.printAsterisque(boite._largeur*4) << endl ;
+		for (Boite boite : listeBoite)
+		{
+			cout << _boite;
+		}
+		os << boite.printAsterisque(boite._largeur*4) << endl ;
 	return os;
+}
+
+/*!
+ * Ecris n fois la lettre *(asterisque).
+ * 
+ * \param  n le nombre de *.
+ * \return Une chaine de caractère contenant n #.
+ */
+string Boite::printAsterisque(int n) const{
+	string diez = "";
+	for (int i = 0; i < n; ++i)
+	{
+		diez+="*";
+	}
+	return diez;
+}
+
+/*!
+ * Ecris n fois un espace.
+ * 
+ * \param  n le nombre d'espaces'.
+ * \return Une chaine de caractère contenant n espaces.
+ */
+string Boite::printSpace(int n) const{
+	string space = "";
+	for (int i = 0; i < n; ++i)
+	{
+		space+=" ";
+	}
+	return space;
 }

@@ -50,7 +50,7 @@ void sansVirgule (ifstream& ifs, ofstream& ofs)
 }
 
 int main() {
-	cout << "Veuillez choisir un nom de fichier valide (respecter la casse et l'extension) : " << endl;
+	/*cout << "Veuillez choisir un nom de fichier valide (respecter la casse et l'extension) : " << endl;
 	string nomFichier;
 	cin >> nomFichier;
 	cout << endl;
@@ -91,6 +91,7 @@ int main() {
     int largeur = it->largeur();
     int hauteur = it->hauteur();
     ++it;
+	    cout << "hola\n";
 
     // Liste des rectangles
     vector<Rectangle> listeRectangle;
@@ -105,12 +106,12 @@ int main() {
 	std::reverse(listeRectangle.begin(), listeRectangle.end());
 
 	// Parcours de la liste de rectangles.
-	for (Rectangle rect : listeRectangle)
+	/*for (Rectangle rect : listeRectangle)
 	{
 		bool boolean = true;
 		int i = 0;
 		// Essaye d'ajouter un rectangle a une boite.
-		while (boolean)
+	 	while (boolean)
 		{
 			try
 			{
@@ -134,10 +135,19 @@ int main() {
 			}
 			++i;
 		}
-	}
-	for (Boite boite : listeBoite)
+	}*/
+
+	/*for (Boite boite : listeBoite)
 	{
 		cout << boite;
 	}
+	    cout << "hola\n";
+	*/
+	 Rectangle r(1,1);
+
+	 Boite b(3,3);
+	// b.add(r);
+	 cout << r;   
+
     return 0;
 }
