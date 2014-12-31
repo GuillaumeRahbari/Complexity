@@ -5,7 +5,7 @@
 //  Created by Guillaume Rahbari on 29/12/2014.
 //  Copyright (c) 2014 Guillaume Rahbari. All rights reserved.
 //
-//
+
 #ifndef _RECTANGLE_H_
 #define _RECTANGLE_H_
 

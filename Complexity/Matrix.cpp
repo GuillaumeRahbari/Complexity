@@ -1,260 +1,72 @@
-#ifndef __MATRIX_CPP
-#define __MATRIX_CPP
+//
+//  Matrix.cpp
+//  Complexity
+//
+//  Created by Guillaume Rahbari on 29/12/2014.
+//  Copyright (c) 2014 Guillaume Rahbari. All rights reserved.
+//
 
-#include "matrix.h"
+#include "Matrix.h"
 
-// Parameter Constructor                                                                                                                                                      
-template<typename T>
-Matrix<T>::Matrix(unsigned _rows, unsigned _cols, const T& _initial) {
-  mat.resize(_rows);
-  for (unsigned i=0; i<mat.size(); i++) {
-    mat[i].resize(_cols, _initial);
-  }
-  rows = _rows;
-  cols = _cols;
+
+/*!
+ *  The matrix is implemented as a std::vector of Vector's. Each Vector
+ *  represents a line of the matrix. They have all the same size (which is the
+ *  number of columns).
+ *
+ *  All Vector's are first created empty, then they are assigned to a
+ *  temporary Vector (mv) with the correct initial values.
+ *
+ *  \param nl number of lines
+ *  \param nc number of columns
+ *  \param x the common value to initialize all components with
+ *
+ */
+Matrix::Matrix(int nl,int nc,  char x)
+    : _nlines(nl), _ncols(nc), _lines(nl, Vector(nc, x))
+{
 }
 
-// Copy Constructor                                                                                                                                                           
-template<typename T>
-Matrix<T>::Matrix(const Matrix<T>& rhs) {
-  mat = rhs.mat;
-  rows = rhs.get_rows();
-  cols = rhs.get_cols();
+/*!
+ *  This operator makes it possible to use char indexing with a Matrix
+ *  (mat[i][ j])
+ */
+Vector& Matrix::operator[](int i)
+{
+    if (i < 0 || i >= _nlines) throw Out_Of_Bounds();
+    return _lines[i];
 }
 
-// (Virtual) Destructor                                                                                                                                                       
-template<typename T>
-Matrix<T>::~Matrix() {}
-
-// Assignment Operator                                                                                                                                                        
-template<typename T>
-Matrix<T>& Matrix<T>::operator=(const Matrix<T>& rhs) {
-  if (&rhs == this)
-    return *this;
-
-  unsigned new_rows = rhs.get_rows();
-  unsigned new_cols = rhs.get_cols();
-
-  mat.resize(new_rows);
-  for (unsigned i=0; i<mat.size(); i++) {
-    mat[i].resize(new_cols);
-  }
-
-  for (unsigned i=0; i<new_rows; i++) {
-    for (unsigned j=0; j<new_cols; j++) {
-      mat[i][j] = rhs(i, j);
-    }
-  }
-  rows = new_rows;
-  cols = new_cols;
-
-  return *this;
+/*!
+ *  This operator makes it possible to use char indexing with a Matrix
+ *  (mat[i][ j])
+ */
+const Vector& Matrix::operator[](int i) const
+{
+    if (i < 0 || i >= _nlines) throw Out_Of_Bounds();
+    return _lines[i];
 }
 
-// Addition of two matrices                                                                                                                                                   
-template<typename T>
-Matrix<T> Matrix<T>::operator+(const Matrix<T>& rhs) {
-  Matrix result(rows, cols, 0.0);
 
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      result(i,j) = this->mat[i][j] + rhs(i,j);
-    }
-  }
-
-  return result;
+char& Matrix::operator()(int i, int j)
+{
+    if (i < 0 || i >= _nlines || j < 0 || j >= _ncols) throw Out_Of_Bounds();
+    return _lines[i][j];
 }
 
-// Cumulative addition of this matrix and another                                                                                                                             
-template<typename T>
-Matrix<T>& Matrix<T>::operator+=(const Matrix<T>& rhs) {
-  unsigned rows = rhs.get_rows();
-  unsigned cols = rhs.get_cols();
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      this->mat[i][j] += rhs(i,j);
-    }
-  }
-
-  return *this;
+char Matrix::operator()(int i, int j) const
+{
+    if (i < 0 || i >= _nlines || j < 0 || j >= _ncols) throw Out_Of_Bounds();
+    return _lines[i][j];
 }
 
-// Subtraction of this matrix and another                                                                                                                                     
-template<typename T>
-Matrix<T> Matrix<T>::operator-(const Matrix<T>& rhs) {
-  unsigned rows = rhs.get_rows();
-  unsigned cols = rhs.get_cols();
-  Matrix result(rows, cols, 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      result(i,j) = this->mat[i][j] - rhs(i,j);
-    }
-  }
-
-  return result;
+/*!
+ *  We print each line of the matrix as an MVector on a single line.
+ */
+ostream& operator<<(ostream& os, const Matrix& mat)
+{
+    for (int i = 0; i < mat._nlines; ++i)
+        os << mat._lines[i] << endl;
+    return os;
 }
 
-// Cumulative subtraction of this matrix and another                                                                                                                          
-template<typename T>
-Matrix<T>& Matrix<T>::operator-=(const Matrix<T>& rhs) {
-  unsigned rows = rhs.get_rows();
-  unsigned cols = rhs.get_cols();
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      this->mat[i][j] -= rhs(i,j);
-    }
-  }
-
-  return *this;
-}
-
-// Left multiplication of this matrix and another                                                                                                                              
-template<typename T>
-Matrix<T> Matrix<T>::operator*(const Matrix<T>& rhs) {
-  unsigned rows = rhs.get_rows();
-  unsigned cols = rhs.get_cols();
-  Matrix result(rows, cols, 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      for (unsigned k=0; k<rows; k++) {
-        result(i,j) += this->mat[i][k] * rhs(k,j);
-      }
-    }
-  }
-
-  return result;
-}
-
-// Cumulative left multiplication of this matrix and another                                                                                                                  
-template<typename T>
-Matrix<T>& Matrix<T>::operator*=(const Matrix<T>& rhs) {
-  Matrix result = (*this) * rhs;
-  (*this) = result;
-  return *this;
-}
-
-// Calculate a transpose of this matrix                                                                                                                                       
-template<typename T>
-Matrix<T> Matrix<T>::transpose() {
-  Matrix result(rows, cols, 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      result(i,j) = this->mat[j][i];
-    }
-  }
-
-  return result;
-}
-
-// Matrix/scalar addition                                                                                                                                                     
-template<typename T>
-Matrix<T> Matrix<T>::operator+(const T& rhs) {
-  Matrix result(rows, cols, 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      result(i,j) = this->mat[i][j] + rhs;
-    }
-  }
-
-  return result;
-}
-
-// Matrix/scalar subtraction                                                                                                                                                  
-template<typename T>
-Matrix<T> Matrix<T>::operator-(const T& rhs) {
-  Matrix result(rows, cols, 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      result(i,j) = this->mat[i][j] - rhs;
-    }
-  }
-
-  return result;
-}
-
-// Matrix/scalar multiplication                                                                                                                                               
-template<typename T>
-Matrix<T> Matrix<T>::operator*(const T& rhs) {
-  Matrix result(rows, cols, 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      result(i,j) = this->mat[i][j] * rhs;
-    }
-  }
-
-  return result;
-}
-
-// Matrix/scalar division                                                                                                                                                     
-template<typename T>
-Matrix<T> Matrix<T>::operator/(const T& rhs) {
-  Matrix result(rows, cols, 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      result(i,j) = this->mat[i][j] / rhs;
-    }
-  }
-
-  return result;
-}
-
-// Multiply a matrix with a vector                                                                                                                                            
-template<typename T>
-std::vector<T> Matrix<T>::operator*(const std::vector<T>& rhs) {
-  std::vector<T> result(rhs.size(), 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    for (unsigned j=0; j<cols; j++) {
-      result[i] = this->mat[i][j] * rhs[j];
-    }
-  }
-
-  return result;
-}
-
-// Obtain a vector of the diagonal elements                                                                                                                                   
-template<typename T>
-std::vector<T> Matrix<T>::diag_vec() {
-  std::vector<T> result(rows, 0.0);
-
-  for (unsigned i=0; i<rows; i++) {
-    result[i] = this->mat[i][i];
-  }
-
-  return result;
-}
-
-// Access the individual elements                                                                                                                                             
-template<typename T>
-T& Matrix<T>::operator()(const unsigned& row, const unsigned& col) {
-  return this->mat[row][col];
-}
-
-// Access the individual elements (const)                                                                                                                                     
-template<typename T>
-const T& Matrix<T>::operator()(const unsigned& row, const unsigned& col) const {
-  return this->mat[row][col];
-}
-
-// Get the number of rows of the matrix                                                                                                                                       
-template<typename T>
-unsigned Matrix<T>::get_rows() const {
-  return this->rows;
-}
-
-// Get the number of columns of the matrix                                                                                                                                    
-template<typename T>
-unsigned Matrix<T>::get_cols() const {
-  return this->cols;
-}
-
-#endif

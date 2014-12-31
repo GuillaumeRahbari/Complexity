@@ -1,51 +1,67 @@
-#ifndef __MATRIX_H
-#define __MATRIX_H
+//
+//  Matrix.h
+//  Complexity
+//
+//  Created by Guillaume Rahbari on 29/12/2014.
+//  Copyright (c) 2014 Guillaume Rahbari. All rights reserved.
+//
 
-#include <vector>
+#ifndef _MATRIX_H_
+#define _MATRIX_H_
 
-template <typename T> class Matrix {
- private:
-  std::vector<std::vector<T> > mat;
-  unsigned rows;
-  unsigned cols;
+#include <iostream>
+using namespace std;
 
- public:
-  Matrix(unsigned _rows, unsigned _cols, const T& _initial);
-  Matrix(const Matrix<T>& rhs);
-  virtual ~Matrix();
+#include "Vector.h"
 
-  // Operator overloading, for "standard" mathematical matrix operations                                                                                                                                                          
-  Matrix<T>& operator=(const Matrix<T>& rhs);
 
-  // Matrix mathematical operations                                                                                                                                                                                               
-  Matrix<T> operator+(const Matrix<T>& rhs);
-  Matrix<T>& operator+=(const Matrix<T>& rhs);
-  Matrix<T> operator-(const Matrix<T>& rhs);
-  Matrix<T>& operator-=(const Matrix<T>& rhs);
-  Matrix<T> operator*(const Matrix<T>& rhs);
-  Matrix<T>& operator*=(const Matrix<T>& rhs);
-  Matrix<T> transpose();
+/*! \class Matrix
+ *
+ * \brief Simple mathematical matrices as used in linear algebra.
+ *
+ * A Matrix is implemented as an STL vector (std::vector) of Vector's.
+*/
 
-  // Matrix/scalar operations                                                                                                                                                                                                     
-  Matrix<T> operator+(const T& rhs);
-  Matrix<T> operator-(const T& rhs);
-  Matrix<T> operator*(const T& rhs);
-  Matrix<T> operator/(const T& rhs);
+class Matrix
+{
+private:
 
-  // Matrix/vector operations                                                                                                                                                                                                     
-  std::vector<T> operator*(const std::vector<T>& rhs);
-  std::vector<T> diag_vec();
+    int _nlines;        //!< Number of lines.
+    int _ncols;         //!< Number of columns.
+    vector<Vector> _lines; //!< The elements themselves.
+   
+public:
 
-  // Access the individual elements                                                                                                                                                                                               
-  T& operator()(const unsigned& row, const unsigned& col);
-  const T& operator()(const unsigned& row, const unsigned& col) const;
+    //! \class Index out of range exception.
+    class Out_Of_Bounds {};
 
-  // Access the row and column sizes                                                                                                                                                                                              
-  unsigned get_rows() const;
-  unsigned get_cols() const;
+    //! \class Operation on vectors with incorrect dimensions exception.
+    class Bad_Dimensions {};
 
+    //! Constructor (also usable as default constructor).
+    Matrix(int nl = 0, int nc = 0, char x = ' ');
+
+    /*! \name Subscript
+     *
+     *  \exception Out_Of_Bounds thrown if index is outside range
+     *
+     * @{
+     */
+    //! A reference to the line at index i (version for a non-constant matrix).
+    Vector& operator[](int i);
+    //! A reference to the line at index i (version for a constant matrix).
+    const Vector& operator[](int i) const;
+
+    //! Access to element at indexes (i,j) (version for a non-constant matrix).
+    char& operator()(int i, int j);
+    //! Access to element at indexes (i,j) (version for aconstant matrix).
+    char operator()(int i, int j) const;
+
+    /*@}*/
+
+    //! IO operation: just display the contents.
+    friend ostream& operator<<(ostream& os, const Matrix& mat);
 };
 
-#include "matrix.cpp"
 
 #endif
