@@ -2,8 +2,8 @@
 //  Boite.cpp
 //  Complexity
 //
-//  Created by Guillaume Rahbari on 29/12/2014.
-//  Copyright (c) 2014 Guillaume Rahbari. All rights reserved.
+//  Created by Garrigos Fernando and Guillaume Rahbari on 29/12/2014.
+//  Copyright (c) 2014 Garrigos Fernando et Guillaume Rahbari . All rights reserved.
 //
 
 #include "Boite.h"
@@ -42,6 +42,9 @@ Boite::Boite(int largeur, int hauteur)
  */
 bool Boite::add (const Rectangle& rect)
 {
+	//"ERREUR : Impossible d'ajouter ce rectangle a une boite (dimensions incorrectes)."
+	if ( 4*rect.largeur() > _largeur*4 || 4*rect.hauteur() > _hauteur*4) throw Invalid();
+
 	bool ajoute = false;
 	//on test la larguer jusqu'a la largeur de la boite - la largeur du rect
 	//pour eviter que le rect deborde  en larguer
@@ -78,7 +81,6 @@ void Boite::addInPosition(const int x,const int y ,const Rectangle& rect)
 	{
 		for (int i = 0; i < 4*rect.hauteur(); ++i)
 		{
-
 			_boite(j+x,i+y) = aux;
 		}
 	}

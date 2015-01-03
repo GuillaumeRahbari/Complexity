@@ -49,7 +49,7 @@ void sansVirgule (ifstream& ifs, ofstream& ofs)
 }
 
 int main() {
-	/*cout << "Veuillez choisir un nom de fichier valide (respecter la casse et l'extension) : " << endl;
+	cout << "Veuillez choisir un nom de fichier valide (respecter la casse et l'extension) : " << endl;
 	string nomFichier;
 	cin >> nomFichier;
 	cout << endl;
@@ -151,7 +151,7 @@ int main() {
 	}
 	   // cout << "hola\n";
 	
-	  */ 
+	  /*
 	Rectangle r(3,1);
   	Rectangle r2(1,2);
  	Rectangle r3(1,1);
@@ -166,13 +166,13 @@ int main() {
     listeRectangle.push_back(r2);
     listeRectangle.push_back(r3);
     listeRectangle.push_back(r4);
-    listeRectangle.push_back(r5);
+    listeRectangle.push_back(r5);*/
   	//listeRectangle.push_back(r6);
   	//listeRectangle.push_back(r7);
     //listeRectangle.push_back(r8);
   	//listeRectangle.push_back(r9);
 
-
+/*
  	Boite b(3,3);
  	   	 cout << b;   
 
@@ -198,7 +198,7 @@ int main() {
 			}
 		}
 	
-		
+		*/
 	 //Boite::b(0,0) = 'P';
 	//b.add(r);
 	//b.add(r);
