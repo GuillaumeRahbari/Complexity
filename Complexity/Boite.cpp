@@ -48,11 +48,11 @@ bool Boite::add (const Rectangle& rect)
 	bool ajoute = false;
 	//on test la larguer jusqu'a la largeur de la boite - la largeur du rect
 	//pour eviter que le rect deborde  en larguer
-	for (int i = 1;i < _largeur*4 - rect.largeur()*4 + 2;++i)
+	for (int i = 1;i < _hauteur*4 - rect.hauteur()*4 + 2;++i)
 	{
 		//on test l'hauteur jusqu'a la l'hauteur de la boite - l'hauteur du rect
 		//pour eviter que le rect deborde  en hauteur
-		for(int j = 1;j < _hauteur*4 - rect.hauteur()*4 + 2 ;++j)
+		for(int j = 1;j < _largeur*4 - rect.largeur()*4 + 2 ;++j)
 		{
 			// tests si on peut placer Rect dans la Boite,
 			// si oui, (i,j) est la position la plus
@@ -77,9 +77,9 @@ void Boite::addInPosition(const int x,const int y ,const Rectangle& rect)
 	//le modulo c'est pour eviter le decalage avec 2 caractere
 	string aux = to_string(NBR%9);
 	//On marque les position dans la boite
-	for ( int j = 0; j < 4*rect.largeur(); ++j)
+	for ( int j = 0; j < 4*rect.hauteur(); ++j)
 	{
-		for (int i = 0; i < 4*rect.hauteur(); ++i)
+		for (int i = 0; i < 4*rect.largeur(); ++i)
 		{
 			_boite(j+x,i+y) = aux;
 		}
@@ -97,12 +97,11 @@ bool Boite::validePlace(const int x,const int y,const Rectangle& rect)
 	bool valide = true;
 
 	//un boucle pour la hauteur du rect
-	for(int i = 0; i < rect.largeur()*4 ;++i )
+	for(int i = 0; i < rect.hauteur()*4 ;i++ )
 	{
 			//Un boucle pour la largeur du rect
-			for(int j = 0;j < rect.hauteur()*4  ;++j)
+			for(int j = 0;j < rect.largeur()*4  ;j++)
 			{
-
 				//On test pour chaque position (x,y) de la boite si est libre
 				if (_boite(i+x,j+y) != " ")
 				{

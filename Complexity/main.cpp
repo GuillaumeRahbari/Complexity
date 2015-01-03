@@ -11,7 +11,7 @@
 #include <algorithm>
 #include "Rectangle.h"
 #include "Boite.h"
-
+#include <sys/time.h>
 using namespace std;
 
 
@@ -49,6 +49,11 @@ void sansVirgule (ifstream& ifs, ofstream& ofs)
 }
 
 int main() {
+	// Variables
+	struct timeval tbegin,tend;
+	double texec=0.;
+	int impo = 0;
+
 	cout << "Veuillez choisir un nom de fichier valide (respecter la casse et l'extension) : " << endl;
 	string nomFichier;
 	cin >> nomFichier;
@@ -90,8 +95,9 @@ int main() {
     int largeur = it->largeur();
     int hauteur = it->hauteur();
     ++it;
-	   // cout << "hola\n";
 
+    // Start timer
+	gettimeofday(&tbegin,NULL);
     // Liste des rectangles
     vector<Rectangle> listeRectangle;
     while (it != end)
@@ -107,109 +113,52 @@ int main() {
 	// Parcours de la liste de rectangles.
 	for (Rectangle rect : listeRectangle)
 	{
-		//cout << rect << endl;
-		bool boolean = true;
+		bool boolean = false;
 		int i = 0;
 		// Essaye d'ajouter un rectangle a une boite.
-	 	while (boolean)
+	 	while (!boolean)
 		{
 			try
 			{
-				//cout << "222222222 = "<< i << endl;
-
-				listeBoite.at(i).add(rect);
-				//cerr << "1111111" << endl;
-				boolean = false;
+				//si on ajoute tous les rect on passe vers true
+				boolean = listeBoite.at(i).add(rect);
 			}
 			catch (Boite::Invalid)
 			{
-				boolean = false;
+				impo++;
+				boolean = true;
 				cerr << "ERREUR : Impossible d'ajouter ce rectangle a une boite (dimensions incorrectes)." << endl;
 			}
 			catch (exception const& e)
 			{
-				cerr << "ERREUR : Plus de boites disponibles -> creation d'une nouvelle boite." << endl;
-				//cerr << "****************" << endl;
+				cerr << "Creation d'une nouvelle boite." << endl;
 				listeBoite.push_back(Boite(largeur, hauteur));
 				--i;
 			}
-			++i;
-					//cout << "2222222 = "<< i << endl;
+			i++;
 		}
 	}
+
+	// End timer
+	gettimeofday(&tend,NULL);
 
 	for (Boite boite : listeBoite)
 	{
-		cout << boite << "   ";
+		cout << boite << endl ;
 	}
-	   // cout << "hola\n";
-	
-	  /*
-	Rectangle r(3,1);
-  	Rectangle r2(1,2);
- 	Rectangle r3(1,1);
-  	Rectangle r4(1,2);
-  	Rectangle r5(2,1);
-  	Rectangle r6(1,1);
-  	Rectangle r7(1,1);
-  	Rectangle r8(1,1);
-  	Rectangle r9(1,1);
-    vector<Rectangle> listeRectangle;
-    listeRectangle.push_back(r);
-    listeRectangle.push_back(r2);
-    listeRectangle.push_back(r3);
-    listeRectangle.push_back(r4);
-    listeRectangle.push_back(r5);*/
-  	//listeRectangle.push_back(r6);
-  	//listeRectangle.push_back(r7);
-    //listeRectangle.push_back(r8);
-  	//listeRectangle.push_back(r9);
 
-/*
- 	Boite b(3,3);
- 	   	 cout << b;   
-
-    // Permet de trier les rectangles dans l'ordre croissant.
-    std::sort(listeRectangle.begin(), listeRectangle.end());
-    // Permet d'avoir les rectangles dans l'ordre decroissant.
-	std::reverse(listeRectangle.begin(), listeRectangle.end());
-	//int i = 0;
-
-	for (Rectangle rect : listeRectangle)
-		{
-			try
-			{
-				b.add(rect);
-				cout << b;
-
-				//boolean = false;
-			}
-			catch(Boite::Invalid_Add)
-			{
-				cerr << "ERREUR : " << endl;
-				//Boite b2(6,6);
-			}
-		}
-	
-		*/
-	 //Boite::b(0,0) = 'P';
-	//b.add(r);
-	//b.add(r);
-	//cout << b;
-	//b.add(r2);
-	//cout << b;
-	//b.add(r4);
-	//cout << b;
-	//b.add(r3);
-	//cout << b;
-	//b.add(r5);
-	//cout << b;
-
-
-
-	//b.add(r5);
-	//b.add(r6);
-	//cout << b;
 	 
+    // Compute execution time
+    texec=((double)(1000*(tend.tv_sec-tbegin.tv_sec)+((tend.tv_usec-tbegin.tv_usec)/1000)))/1000.;
+	
+	cout << "Nombre des rectangles = " << listeRectangle.size()<< endl;
+	cout << "Nombre des boites utilisées = " << listeBoite.size()<< endl;
+	if (impo != 0)
+	{
+		cout << "Nombre des rectangles Impossible à ajouter = " << impo << endl;
+	}
+	cout << "Temps d'Execution  = " << texec <<" seg"<< endl;
+	
+
     return 0;
 }
