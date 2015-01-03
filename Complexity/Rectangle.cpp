@@ -2,8 +2,8 @@
 //  Rectangle.cpp
 //  Complexity
 //
-//  Created by Guillaume Rahbari on 29/12/2014.
-//  Copyright (c) 2014 Guillaume Rahbari. All rights reserved.
+//  Created by Garrigos Fernando and Guillaume Rahbari on 29/12/2014.
+//  Copyright (c) 2014 Garrigos Fernando et Guillaume Rahbari . All rights reserved.
 //
 
 #include "Rectangle.h"
