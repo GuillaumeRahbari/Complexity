@@ -42,15 +42,10 @@ public:
 	//! Ecris une Boite.
     friend ::std::ostream& operator<<(::std::ostream& os, Boite boite);
     
-    //!
+    //! Marque les position du rect dans la boite
     void addInPosition(const int x,const int y,const Rectangle& rect );
 
-    //! Test si la surface du rectangle existe dans la boite 
-	int valideLangeur(int ligne);
-	int valideHauteur(int colonne);
-	bool valideLangeurRect(const Rectangle& rect);
-	bool valideHauteurRect(const Rectangle& rect);
-	//!Test si les position dans la boite ou on veut place le rect sont libre
+	//! Test si les position dans la boite ou on veut place le rect sont libre
 	bool validePlace(const int x,const int y,const Rectangle& rect);
 
 
