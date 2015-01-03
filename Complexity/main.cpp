@@ -152,11 +152,11 @@ int main() {
 	   // cout << "hola\n";
 	
 	  */ 
-	Rectangle r(2,1);
- 	Rectangle r3(1,1);
+	Rectangle r(3,1);
   	Rectangle r2(1,2);
-  	Rectangle r4(3,1);
-  	Rectangle r5(1,2);
+ 	Rectangle r3(1,1);
+  	Rectangle r4(1,2);
+  	Rectangle r5(2,1);
   	Rectangle r6(1,1);
   	Rectangle r7(1,1);
   	Rectangle r8(1,1);
@@ -167,8 +167,8 @@ int main() {
     listeRectangle.push_back(r3);
     listeRectangle.push_back(r4);
     listeRectangle.push_back(r5);
-  	listeRectangle.push_back(r6);
-  	listeRectangle.push_back(r7);
+  	//listeRectangle.push_back(r6);
+  	//listeRectangle.push_back(r7);
     //listeRectangle.push_back(r8);
   	//listeRectangle.push_back(r9);
 
@@ -182,7 +182,7 @@ int main() {
 	std::reverse(listeRectangle.begin(), listeRectangle.end());
 	//int i = 0;
 
-		for (Rectangle rect : listeRectangle)
+	for (Rectangle rect : listeRectangle)
 		{
 			try
 			{
@@ -198,20 +198,17 @@ int main() {
 			}
 		}
 	
-
-
 		
 	 //Boite::b(0,0) = 'P';
-	// b.add(r);
-	/*b.add(r);
-		cout << b;
-
-	b.add(r2);
-	cout << b;
-	b.add(r4);
-	cout << b;
-	b.add(r3);
-	cout << b;*/
+	//b.add(r);
+	//b.add(r);
+	//cout << b;
+	//b.add(r2);
+	//cout << b;
+	//b.add(r4);
+	//cout << b;
+	//b.add(r3);
+	//cout << b;
 	//b.add(r5);
 	//cout << b;
 

@@ -39,7 +39,7 @@ Boite::Boite(int largeur, int hauteur)
 /*!
  * \param rect rectangle.
  */
-void Boite::add (const Rectangle& rect) 
+/*void Boite::add (const Rectangle& rect) 
 {
 
 	//"ERREUR : Impossible d'ajouter ce rectangle a une boite (dimensions incorrectes)."
@@ -70,28 +70,109 @@ void Boite::add (const Rectangle& rect)
 		cl++;
 	}
 	cc = cl =0;
-}
+}*/
 
+
+/*!
+ * \param rect rectangle.
+ bool place(R,i,j)
+// tests si on peut placer R dans B, si oui (i,j) est la position la plus
+// en haut et à gauche qui marche
+for i = 1 to X(B)-X(R)+1
+    for j = 1 to Y(B)-Y(R)+1
+        if placement_valid(R,i,j) then return true
+    endfor
+endfor
+return false
+ */
+bool Boite::add (const Rectangle& rect)
+{
+	bool ajoute = false;
+	//on test la larguer jusqu'a la largeur de la boite - la largeur du rect
+	//pour eviter que le rect deborde  en larguer
+	for (int i = 1;i < _largeur*4 - rect.largeur()*4 + 2;++i)
+	{
+		//on test l'hauteur jusqu'a la l'hauteur de la boite - l'hauteur du rect
+		//pour eviter que le rect deborde  en hauteur
+		for(int j = 1;j < _hauteur*4 - rect.hauteur()*4 + 2 ;++j)
+		{
+
+			cout << "boite largeur = "<< i <<endl;
+			cout << "boite hauteur = "<< j <<endl;
+			// tests si on peut placer Rect dans la Boite,
+			// si oui, (i,j) est la position la plus
+			// en haut et à gauche qui marche
+			if (validePlace(i,j,rect) != 0)
+			{
+				//On ajoute le rect en la position 
+				cout << "ajoute"<<endl;
+				addInPosition(i,j,rect);
+				ajoute = true;
+				return  ajoute;
+			}
+		}
+	}
+	return ajoute;
+}
 
 /*!
  * \add un rect rectangle en la position determiné
  */
 void Boite::addInPosition(const int x,const int y ,const Rectangle& rect)
 {
-	string aux = to_string(NBR%9);//le modulo c'est pour eviter le decalage avec 2 caractere
-	/*cout << "4*rect.hauteur()+1 = "<< 4*rect.hauteur()+1 <<" "<<rect.hauteur()<< endl;
-	cout << "4*rect.largeur() = "<< 4*rect.largeur() <<" "<< rect.largeur() << endl;
-	*//*cout << "x = "<< cc + rect.largeur() << endl;
-	cout << "y = "<< _largeur*4 << endl;*/
-
-	for ( int j = 1; j < 4*rect.hauteur()+1; ++j)
+	//le modulo c'est pour eviter le decalage avec 2 caractere
+	string aux = to_string(NBR%9);
+	
+	for ( int j = 0; j < 4*rect.largeur(); ++j)
 	{
-		for (int i = 0; i < 4*rect.largeur(); ++i)
+		for (int i = 0; i < 4*rect.hauteur(); ++i)
 		{
-			_boite(y + j,1 + i + x) = aux;
+
+			_boite(j+x,i+y) = aux;
 		}
 	}
+	cout<<"add in position"<< endl;
 	++NBR;
+}
+
+
+/*!
+* Test si les position dans la boite ou
+* on veut place le rect sont libre
+*/
+bool Boite::validePlace(const int x,const int y,const Rectangle& rect)
+{
+	bool valide = true;
+
+	//un boucle pour la hauteur du rect
+	for(int i = 0; i < rect.largeur()*4 ;++i )
+	{
+			//Un boucle pour la largeur du rect
+			for(int j = 0;j < rect.hauteur()*4  ;++j)
+			{
+				//cout <<"largeur "<<rect.largeur()*4 <<endl;
+				cout <<"h = "<< i<<endl;
+				cout << "l = " <<j << endl;
+				cout <<"x = "<< x<<endl;
+				cout << "y = " <<y << endl;
+
+				//On test pour chaque position (x,y) de la boite si est libre
+				if (_boite(i+x,j+y) != " ")
+				{
+					cout << "NON valide = "<< _boite(i+x,j+y) << endl;
+					cout << "NON valide x = "<< i+x << endl;
+					cout << "NON valide y = "<< j+y << endl;
+					//si (i,j) != " " alors la position n'est pas libre
+					valide = false;
+					return valide;
+				}
+			}
+	}
+	//si la condition n'est jamais false 
+	//alors tous les position pour place le rect sont libres
+	cout << " valide = "  << endl;
+
+	return valide;
 }
 
 
@@ -103,7 +184,7 @@ void Boite::addInPosition(const int x,const int y ,const Rectangle& rect)
 	
 int Boite::valideLangeur(int ligne)
 {	
-	for (int i = 0; i < 4*_largeur; ++i)
+	/*for (int i = 0; i < 4*_largeur; ++i)
 	{
 		//cout << "l = "<< _boite(ligne+1  ,i)<< endl;
 
@@ -113,12 +194,12 @@ int Boite::valideLangeur(int ligne)
 
 			return i - 1;	
 		}  
-	}
+	}*/
 	return 0;
 }
 int Boite::valideHauteur(int colonne)
 {	
-	for (int i = 0; i < 4*_hauteur; ++i)
+	/*for (int i = 0; i < 4*_hauteur; ++i)
 	{
 				//	cout << "i = "<< _boite(i,colonne+1) << endl;
 
@@ -128,7 +209,7 @@ int Boite::valideHauteur(int colonne)
 
 			return i - 1;	
 		}  
-	}
+	}*/
 	return 0;
 }
 
@@ -139,7 +220,7 @@ bool Boite::valideLangeurRect(const Rectangle& rect)
 	//cout << "bbb" << cc<< endl; 
 
 	
-	if (cc + 4*rect.largeur() <= _largeur*4)
+	/*if (cc + 4*rect.largeur() <= _largeur*4)
 	{
 		if( _boite(cl+1,cc + 4*rect.largeur()) == " ")
 		{
@@ -149,7 +230,8 @@ bool Boite::valideLangeurRect(const Rectangle& rect)
 	else
 	{
 		return false;
-	}
+	}*/
+	return true;
 }
 
 bool Boite::valideHauteurRect(const Rectangle& rect)
@@ -158,7 +240,7 @@ bool Boite::valideHauteurRect(const Rectangle& rect)
 	//cout << "ccc" << cl<< endl; 
 	//cout << "ccc" << cc<< endl; 
 
-	if (cl + 4*rect.hauteur() <= _hauteur*4)
+	/*if (cl + 4*rect.hauteur() <= _hauteur*4)
 	{
 		if (_boite(cl+4*rect.hauteur(),cc+1) == " ")
 		{
@@ -168,7 +250,8 @@ bool Boite::valideHauteurRect(const Rectangle& rect)
 	else
 	{
 		return false;
-	}
+	}*/
+		return true;
 }
 
 /*!

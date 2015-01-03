@@ -37,7 +37,7 @@ public:
 	Boite(int largeur = 0, int hauteur = 0);
 
 	//! Ajoute un rectangle a la fin du vecteur.
-	void add (const Rectangle& rect);
+	bool add (const Rectangle& rect);
 
 	//! Ecris une Boite.
     friend ::std::ostream& operator<<(::std::ostream& os, Boite boite);
@@ -50,6 +50,9 @@ public:
 	int valideHauteur(int colonne);
 	bool valideLangeurRect(const Rectangle& rect);
 	bool valideHauteurRect(const Rectangle& rect);
+	//!Test si les position dans la boite ou on veut place le rect sont libre
+	bool validePlace(const int x,const int y,const Rectangle& rect);
+
 
 
 };
