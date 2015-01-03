@@ -25,11 +25,7 @@ private:
 	Matrix _boite;
 
 public:
-	//! Ajout d'un rectangle invalide.
-	class Invalid_Add {};
 
-	//! Ajout d'un rectangle invalide.
-	class Invalid_Add_larguer {};
 	//! Invalide rectangle.
 	class Invalid {};
 

@@ -121,12 +121,6 @@ int main() {
 				//cerr << "1111111" << endl;
 				boolean = false;
 			}
-			catch (Boite::Invalid_Add)
-			{
-				cerr << "ERREUR : Impossible d'ajouter le rectangle a la boite." << endl;
-			//cerr << "ERREUR : Impossible d'ajouter le rectangle a la boite." << endl;
-
-			}
 			catch (Boite::Invalid)
 			{
 				boolean = false;
@@ -141,7 +135,6 @@ int main() {
 			}
 			++i;
 					//cout << "2222222 = "<< i << endl;
-
 		}
 	}
 
