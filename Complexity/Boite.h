@@ -28,6 +28,8 @@ public:
 	//! Ajout d'un rectangle invalide.
 	class Invalid_Add {};
 
+	//! Ajout d'un rectangle invalide.
+	class Invalid_Add_larguer {};
 	//! Invalide rectangle.
 	class Invalid {};
 
@@ -37,14 +39,18 @@ public:
 	//! Ajoute un rectangle a la fin du vecteur.
 	void add (const Rectangle& rect);
 
-	//! Ecris des *.
-    string printAsterisque(int n) const;
-
-    // Ecris des espaces.
-    string printSpace(int n) const;
-
 	//! Ecris une Boite.
     friend ::std::ostream& operator<<(::std::ostream& os, Boite boite);
+    
+    //!
+    void addInPosition(const int x,const int y,const Rectangle& rect );
+
+    //! Test si la surface du rectangle existe dans la boite 
+	int valideLangeur(int ligne);
+	int valideHauteur(int colonne);
+	bool valideLangeurRect(const Rectangle& rect);
+	bool valideHauteurRect(const Rectangle& rect);
+
 
 };
 
