@@ -46,20 +46,20 @@ bool Boite::add (const Rectangle& rect)
 	if ( 4*rect.largeur() > _largeur*4 || 4*rect.hauteur() > _hauteur*4) throw Invalid();
 
 	bool ajoute = false;
-	//on test la larguer jusqu'a la largeur de la boite - la largeur du rect
-	//pour eviter que le rect deborde  en larguer
+	//on test la largeur jusqu'a: largeur de la boite - largeur du rect
+	//pour eviter que le rect ne deborde en largeur
 	for (int i = 1;i < _hauteur*4 - rect.hauteur()*4 + 2;++i)
 	{
-		//on test l'hauteur jusqu'a la l'hauteur de la boite - l'hauteur du rect
-		//pour eviter que le rect deborde  en hauteur
+		//on test la hauteur jusqu'a: hauteur de la boite - hauteur du rect
+		//pour eviter que le rect ne deborde en hauteur
 		for(int j = 1;j < _largeur*4 - rect.largeur()*4 + 2 ;++j)
 		{
-			// tests si on peut placer Rect dans la Boite,
+			// test si on peut placer Rect dans la Boite,
 			// si oui, (i,j) est la position la plus
-			// en haut et à gauche qui marche
+			// en haut et à gauche
 			if (validePlace(i,j,rect) != 0)
 			{
-				//On ajoute le rect en la position 
+				//On ajoute le rect a la position 
 				addInPosition(i,j,rect);
 				ajoute = true;
 				return  ajoute;
@@ -89,20 +89,20 @@ void Boite::addInPosition(const int x,const int y ,const Rectangle& rect)
 
 
 /*!
-* Test si les position dans la boite ou
-* on veut place le rect sont libre
+* Test si les positions de la boite ou
+* l'on veut placer le rect sont libres
 */
 bool Boite::validePlace(const int x,const int y,const Rectangle& rect)
 {
 	bool valide = true;
 
-	//un boucle pour la hauteur du rect
+	//une boucle pour la hauteur du rect
 	for(int i = 0; i < rect.hauteur()*4 ;i++ )
 	{
-			//Un boucle pour la largeur du rect
+			//Une boucle pour la largeur du rect
 			for(int j = 0;j < rect.largeur()*4  ;j++)
 			{
-				//On test pour chaque position (x,y) de la boite si est libre
+				//On test pour chaque position (x,y) de la boite si elle est libre
 				if (_boite(i+x,j+y) != " ")
 				{
 					//si (i,j) != " " alors la position n'est pas libre
@@ -112,7 +112,7 @@ bool Boite::validePlace(const int x,const int y,const Rectangle& rect)
 			}
 	}
 	//si la condition n'est jamais false 
-	//alors tous les position pour place le rect sont libres
+	//alors toutes les position pour placer le rect sont libres
 	return valide;
 }
 

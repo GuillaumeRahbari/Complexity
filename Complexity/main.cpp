@@ -56,6 +56,7 @@ int main() {
 	int impo = 0;
 
 	cout << "Veuillez choisir un nom de fichier valide (respecter la casse et l'extension) : " << endl;
+	cout << "Fichiers Disponibles : Exemple3.txt, Exemple2.txt, Exemple1.txt " << endl;
 	string nomFichier;
 	cin >> nomFichier;
 	cout << endl;
@@ -74,12 +75,12 @@ int main() {
 	    }
 	    else
 	    {
-	    	cerr << "ERREUR" << endl;
+	    	cerr << "ERREUR Fichiers, problème lors de l'ouverture, respecter la casse et l'extension" << endl;
 	    }
     }
     else
     {
-    	cerr << "ERREUR" << endl;
+    	cerr << "ERREUR Fichiers,problème lors de l'ouverture, respecter la casse et l'extension" << endl;
     }
     // Fermeture des fichiers.
     fichier.close();
@@ -116,12 +117,12 @@ int main() {
 	{
 		bool boolean = false;
 		int i = 0;
-		// Essaye d'ajouter un rectangle a une boite.
+		// Essaie d'ajouter un rectangle a une boite.
 	 	while (!boolean)
 		{
 			try
 			{
-				//si on ajoute tous les rect on passe vers true
+				//si on ajoute tous les rectangles, on passe vers true
 				boolean = listeBoite.at(i).add(rect);
 			}
 			catch (Boite::Invalid)
