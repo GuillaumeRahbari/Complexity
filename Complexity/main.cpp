@@ -152,11 +152,11 @@ int main() {
     // Compute execution time
     texec=((double)(1000*(tend.tv_sec-tbegin.tv_sec)+((tend.tv_usec-tbegin.tv_usec)/1000)))/1000.;
 	
-	cout << "Nombre des rectangles = " << listeRectangle.size()<< endl;
-	cout << "Nombre des boites utilisées = " << listeBoite.size()<< endl;
+	cout << "Nombre de rectangles = " << listeRectangle.size()<< endl;
+	cout << "Nombre de boites utilisées = " << listeBoite.size()<< endl;
 	if (impo != 0)
 	{
-		cout << "Nombre des rectangles Impossible à ajouter = " << impo << endl;
+		cout << "Nombre de rectangles Impossible à ajouter = " << impo << endl;
 	}
 	cout << "Temps d'Execution  = " << texec <<" seg"<< endl;
 	
